@@ -1,0 +1,91 @@
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Collection: users
+// Document ID: userId (UID)
+// Fields:
+//   - uid: string (required) - Firebase Auth UID
+//   - email: string (required, email format) - User email address
+//   - role: string (required, enum: ['admin', 'customer']) - User role
+//   - displayName: string (optional) - User's full name
+//
+// Collection: orders
+// Document ID: orderId
+// Fields:
+//   - id: string (optional) - Order ID
+//   - customerEmail: string (required, email format) - Customer email
+//   - customerName: string (required) - Customer name
+//   - customerPhone: string (required) - Customer phone number
+//   - customerAddress: string (required) - Customer delivery address
+//   - items: list (required) - List of order items
+//   - total: number (required, positive) - Total order amount
+//   - status: string (required, enum: ['pending', 'shipped', 'delivered', 'cancelled']) - Order status
+//   - createdAt: timestamp (required) - Order timestamp
+//
+// ===============================================================
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+          (request.auth.token.email == "mondragoncunalatamedoromarino@gmail.com" && request.auth.token.email_verified == true));
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidUser(data) {
+      return data.keys().hasAll(['uid', 'email', 'role']) &&
+             data.uid is string &&
+             data.email is string && isValidEmail(data.email) &&
+             data.role in ['admin', 'customer'];
+    }
+
+    function isValidOrder(data) {
+      return data.keys().hasAll(['customerEmail', 'customerName', 'customerPhone', 'customerAddress', 'items', 'total', 'status', 'createdAt']) &&
+             data.customerEmail is string && isValidEmail(data.customerEmail) &&
+             data.customerName is string && data.customerName.size() > 0 && data.customerName.size() < 100 &&
+             data.customerPhone is string && data.customerPhone.size() > 0 && data.customerPhone.size() < 30 &&
+             data.customerAddress is string && data.customerAddress.size() > 0 && data.customerAddress.size() < 500 &&
+             data.items is list && data.items.size() > 0 && data.items.size() < 50 &&
+             data.total is number && data.total >= 0 &&
+             data.status in ['pending', 'shipped', 'delivered', 'cancelled'] &&
+             data.createdAt is timestamp;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isAuthenticated() && isValidUser(request.resource.data) && (isOwner(userId) && request.resource.data.role == 'customer' || isAdmin());
+      allow update: if isAuthenticated() && isValidUser(request.resource.data) && (isOwner(userId) && request.resource.data.role == resource.data.role || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    match /orders/{orderId} {
+      allow read: if isAdmin();
+      allow create: if isValidOrder(request.resource.data);
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+  }
+}

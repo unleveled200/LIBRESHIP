@@ -1,0 +1,55 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "format": "email", "description": "User email address" },
+        "role": { "type": "string", "enum": ["admin", "customer"], "description": "User role" },
+        "displayName": { "type": "string", "description": "User's full name" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order details.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Order ID" },
+        "customerEmail": { "type": "string", "format": "email", "description": "Customer email" },
+        "customerName": { "type": "string", "description": "Customer name" },
+        "customerPhone": { "type": "string", "description": "Customer phone number" },
+        "customerAddress": { "type": "string", "description": "Customer delivery address" },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "productId": { "type": "string" },
+              "name": { "type": "string" },
+              "price": { "type": "number" },
+              "quantity": { "type": "integer" },
+              "mlUrl": { "type": "string", "description": "MercadoLibre product URL" }
+            }
+          }
+        },
+        "total": { "type": "number", "description": "Total order amount" },
+        "status": { "type": "string", "enum": ["pending", "shipped", "delivered", "cancelled"], "description": "Order status" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Order timestamp" }
+      },
+      "required": ["customerEmail", "customerName", "customerPhone", "customerAddress", "items", "total", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents."
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Order documents."
+    }
+  }
+}
