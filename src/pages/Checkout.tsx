@@ -17,7 +17,8 @@ export default function Checkout() {
     phone: '',
     address: '',
     city: '',
-    zip: ''
+    zip: '',
+    country: 'Argentina'
   });
 
   const handleSubmit = async (e: FormEvent) => {
@@ -29,7 +30,7 @@ export default function Checkout() {
         customerName: formData.name,
         customerEmail: formData.email,
         customerPhone: formData.phone,
-        customerAddress: `${formData.address}, ${formData.city}, ${formData.zip}`,
+        customerAddress: `${formData.address}, ${formData.city}, ${formData.zip}, ${formData.country}`,
         items: cart.map(item => ({
           productId: item.id,
           name: item.name,
@@ -106,7 +107,7 @@ export default function Checkout() {
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-zinc-500">Delivery Address:</span>
-              <span className="font-bold text-right">{formData.address}, {formData.city}</span>
+              <span className="font-bold text-right">{formData.address}, {formData.city}, {formData.country}</span>
             </div>
           </div>
           <Link to="/" className="inline-block px-10 py-4 bg-zinc-900 text-white rounded-2xl font-bold hover:bg-zinc-800 transition-all shadow-lg">
@@ -187,6 +188,20 @@ export default function Checkout() {
                   className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl focus:ring-2 focus:ring-yellow-400 outline-none transition-all"
                   placeholder="123 Main St, Apt 4B"
                 />
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-zinc-700 mb-2">Country</label>
+                <select 
+                  required
+                  value={formData.country}
+                  onChange={e => setFormData({...formData, country: e.target.value})}
+                  className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-xl focus:ring-2 focus:ring-yellow-400 outline-none transition-all"
+                >
+                  <option value="Argentina">Argentina 🇦🇷</option>
+                  <option value="Chile">Chile 🇨🇱</option>
+                  <option value="Uruguay">Uruguay 🇺🇾</option>
+                  <option value="Paraguay">Paraguay 🇵🇾</option>
+                </select>
               </div>
               <div>
                 <label className="block text-sm font-bold text-zinc-700 mb-2">City</label>

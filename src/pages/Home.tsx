@@ -34,16 +34,16 @@ export default function Home() {
               <span className="text-yellow-400">Delivered to You.</span>
             </h1>
             <p className="text-zinc-300 text-lg mb-10 leading-relaxed">
-              Shop directly from our curated store or send us any MercadoLibre link. We handle the purchase and reship it to your doorstep with Cash on Delivery.
+              Shop directly from our curated store or send us any MercadoLibre link. We handle the purchase and deliver it to your door in Argentina, Chile, Uruguay, and more.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/shop" className="px-8 py-4 bg-yellow-400 text-zinc-900 rounded-xl font-bold hover:bg-yellow-300 transition-all flex items-center gap-2 group">
-                Shop Now
+                Browse Shop
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <a href="#how-it-works" className="px-8 py-4 bg-white/10 text-white backdrop-blur rounded-xl font-bold hover:bg-white/20 transition-all">
-                How it Works
-              </a>
+              <Link to="/shop#custom-order" className="px-8 py-4 bg-white/10 text-white backdrop-blur rounded-xl font-bold hover:bg-white/20 transition-all flex items-center gap-2">
+                Order by Link
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -87,23 +87,23 @@ export default function Home() {
           {[
             { 
               icon: ShoppingBag, 
-              title: '1. Browse & Choose', 
-              desc: 'Select products from our shop or send us any MercadoLibre link you want.' 
+              title: '1. Find a Link', 
+              desc: 'Browse MercadoLibre and copy the URL of any product you want to buy.' 
             },
             { 
               icon: MessageSquare, 
-              title: '2. Order via WhatsApp', 
-              desc: 'Click "Buy Now" to chat with us. We confirm price, stock, and shipping.' 
+              title: '2. Paste & Quote', 
+              desc: 'Paste the link in our shop and select your country. We will give you a final price including international shipping.' 
             },
             { 
               icon: PackageCheck, 
-              title: '3. We Handle Logistics', 
-              desc: 'We purchase the item, inspect it, and package it securely for reshipping.' 
+              title: '3. We Buy It', 
+              desc: 'Once confirmed, we handle the purchase and logistics from the seller to our warehouse.' 
             },
             { 
               icon: Truck, 
-              title: '4. Fast Delivery', 
-              desc: 'Your package is delivered to your door. Pay via COD or preferred method.' 
+              title: '4. Doorstep Delivery', 
+              desc: 'We deliver the product to your door in Salta. You pay when you receive it!' 
             },
           ].map((step, i) => (
             <motion.div 

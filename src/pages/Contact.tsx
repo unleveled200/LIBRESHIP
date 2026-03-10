@@ -27,6 +27,17 @@ export default function Contact() {
         {/* Contact Info */}
         <div className="space-y-8">
           <div className="bg-white p-8 rounded-3xl border border-zinc-100 shadow-sm">
+            <div className="bg-emerald-100 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
+              <Phone className="w-6 h-6 text-emerald-600" />
+            </div>
+            <h3 className="font-bold text-lg mb-2">WhatsApp Us</h3>
+            <p className="text-zinc-500 text-sm mb-4">Fastest way to get a quote or support.</p>
+            <a href="https://wa.me/5491121857045" target="_blank" rel="noopener noreferrer" className="text-zinc-900 font-bold hover:text-emerald-600 transition-colors">
+              +54 9 11 2185-7045
+            </a>
+          </div>
+
+          <div className="bg-white p-8 rounded-3xl border border-zinc-100 shadow-sm">
             <div className="bg-yellow-100 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
               <Mail className="w-6 h-6 text-yellow-600" />
             </div>
@@ -34,17 +45,6 @@ export default function Contact() {
             <p className="text-zinc-500 text-sm mb-4">Our support team will respond within 24 hours.</p>
             <a href="mailto:addnice4@gmail.com" className="text-zinc-900 font-bold hover:text-yellow-600 transition-colors">
               addnice4@gmail.com
-            </a>
-          </div>
-
-          <div className="bg-white p-8 rounded-3xl border border-zinc-100 shadow-sm">
-            <div className="bg-yellow-100 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
-              <Phone className="w-6 h-6 text-yellow-600" />
-            </div>
-            <h3 className="font-bold text-lg mb-2">Call Us</h3>
-            <p className="text-zinc-500 text-sm mb-4">Mon-Fri from 8am to 6pm EST.</p>
-            <a href="tel:3874482047" className="text-zinc-900 font-bold hover:text-yellow-600 transition-colors">
-              3874482047
             </a>
           </div>
 

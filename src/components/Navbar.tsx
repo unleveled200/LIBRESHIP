@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Search, Menu, X, Package2 } from 'lucide-react';
+import { ShoppingCart, Search, Menu, X, Package2, MapPin } from 'lucide-react';
 import { useState } from 'react';
 import { useCart } from '../CartContext';
 import { motion, AnimatePresence } from 'motion/react';
@@ -12,13 +12,18 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 glass shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-6">
             <Link to="/" className="flex items-center gap-2">
               <div className="bg-yellow-400 p-1.5 rounded-lg">
                 <Package2 className="w-6 h-6 text-zinc-900" />
               </div>
               <span className="font-display font-bold text-xl tracking-tight">LibreShip</span>
             </Link>
+
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-zinc-100 rounded-full text-[10px] font-bold text-zinc-600 uppercase tracking-wider">
+              <MapPin className="w-3 h-3 text-yellow-600" />
+              <span>Shipping to: Argentina 🇦🇷</span>
+            </div>
           </div>
 
           {/* Desktop Nav */}

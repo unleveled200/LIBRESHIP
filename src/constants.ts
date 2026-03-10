@@ -41,6 +41,17 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviews: 88,
     mlUrl: 'https://www.mercadolibre.com.ar/auriculares-inalambricos-aiwa-aw-bt301-negro/p/MLA19149264'
+  },
+  {
+    id: 'nespresso-essenza-mini',
+    name: 'Cafetera Nespresso Essenza Mini White',
+    description: 'La máquina más pequeña de Nespresso. Essenza Mini combina facilidad de uso, belleza minimalista y calidad incomparable para crear la taza de café perfecta en todo momento. Presión de 19 bares y calentamiento rápido en 25 segundos.',
+    price: 185.00,
+    category: 'home',
+    image: 'https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&q=80&w=800',
+    rating: 4.9,
+    reviews: 245,
+    mlUrl: 'https://www.mercadolibre.com.ar/cafetera-nespresso-essenza-mini-white/up/MLAU3201384689'
   }
 ];
 

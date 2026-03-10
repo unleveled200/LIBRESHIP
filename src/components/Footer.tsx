@@ -52,7 +52,9 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-yellow-400" />
-                3874482047
+                <a href="https://wa.me/5491121857045" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                  +54 9 11 2185-7045 (WhatsApp)
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <MapPin className="w-4 h-4 text-yellow-400" />
